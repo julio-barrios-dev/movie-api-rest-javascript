@@ -1,0 +1,1 @@
+console.log(`https://www.sdadas./${API_KEY}`)

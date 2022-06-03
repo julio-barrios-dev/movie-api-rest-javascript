@@ -1,0 +1,20 @@
+{
+  "name": "movie-api-rest-javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Juliobarriosdev/movie-api-rest-javascript.git"
+  },
+  "keywords": [],
+  "author": "Julio Barrios <julio.barrios.9618@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Juliobarriosdev/movie-api-rest-javascript/issues"
+  },
+  "homepage": "https://github.com/Juliobarriosdev/movie-api-rest-javascript#readme"
+}
