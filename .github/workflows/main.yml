@@ -24,7 +24,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
+      
+      - name: Build and Deploy
+        run: echo $API_KEY
+        env: 
+          API_KEY: ${{ secrets.API_KEY }}
+          
       # Runs a single command using the runners shell
       - name: Build and Deploy
         uses: Juliobarriosdev/movie-api-rest-javascript@main
