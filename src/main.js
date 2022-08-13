@@ -51,46 +51,51 @@ function createMovies(movies, container,{ lazyLoad = false, clean = true}= {}) {
     container.innerHTML = ''
   }
 
-  movies.forEach(movie => {
-    const movieContainer = document.createElement('div')
-    movieContainer.classList.add('movie-container')
-    
-    const movieImg = document.createElement('img')
-    movieImg.classList.add('movie-img')
-    movieImg.addEventListener('click', () => {
-      location.hash = `#movie=${movie.id}`
-    })
-    movieImg.setAttribute('Alt', movie.title)
-    movieImg.setAttribute(
-      lazyLoad ? 'data-img' : 'src', 
-      `https://image.tmdb.org/t/p/w300/${movie.poster_path}`)
+  if (movies.length !== 0) {
+    movies.forEach(movie => {
+      const movieContainer = document.createElement('div')
+      movieContainer.classList.add('movie-container')
       
-      movieImg.addEventListener('error', () => {
-        movieImg.setAttribute(
-          'src',
-          'https://static.platzi.com/static/images/error/img404.png'
-
-        )
+      const movieImg = document.createElement('img')
+      movieImg.classList.add('movie-img')
+      movieImg.addEventListener('click', () => {
+        location.hash = `#movie=${movie.id}`
       })
+      movieImg.setAttribute('Alt', movie.title)
+      movieImg.setAttribute(
+        lazyLoad ? 'data-img' : 'src', 
+        `https://image.tmdb.org/t/p/w300/${movie.poster_path}`)
+        
+        movieImg.addEventListener('error', () => {
+          movieImg.setAttribute(
+            'src',
+            'https://static.platzi.com/static/images/error/img404.png'
+  
+          )
+        })
+  
+        const movieBtn = document.createElement('button')
+        movieBtn.classList.add('movie-btn')
+        likedMovieList()[movie.id] && movieBtn.classList.add('movie-btn--liked')
+        movieBtn.addEventListener('click', () => {
+          movieBtn.classList.toggle('movie-btn--liked')
+          likeMovie(movie)
+          getLikedMovies()
+          getTrendingMoviesPreview()
+        })
+  
+        if (lazyLoad) {
+        lazyLoader.observe(movieImg)
+      }
+  
+      movieContainer.appendChild(movieImg)
+      movieContainer.appendChild(movieBtn)
+      container.appendChild(movieContainer)
+    })
+    return null
+  }
+  container.innerHTML = `<h4>Sin resultados</h4>`
 
-      const movieBtn = document.createElement('button')
-      movieBtn.classList.add('movie-btn')
-      likedMovieList()[movie.id] && movieBtn.classList.add('movie-btn--liked')
-      movieBtn.addEventListener('click', () => {
-        movieBtn.classList.toggle('movie-btn--liked')
-        likeMovie(movie)
-        getLikedMovies()
-        getTrendingMoviesPreview()
-      })
-
-      if (lazyLoad) {
-      lazyLoader.observe(movieImg)
-    }
-
-    movieContainer.appendChild(movieImg)
-    movieContainer.appendChild(movieBtn)
-    container.appendChild(movieContainer)
-  })
 }
 
 function createCategories(categories, container) {
@@ -115,6 +120,18 @@ function createCategories(categories, container) {
     container.appendChild(categorieContainer)
   })
 }
+//Snap-scroll 
+
+function snapScroll (container, displacementScroll) {
+  container.scrollBy({
+    top: 0,
+    left: displacementScroll,
+    behavior: "smooth"
+  })
+}
+
+buttonLeft.addEventListener('click',() => snapScroll(trendingMoviesPreviewList, -80)) 
+buttonRight.addEventListener('click',() => snapScroll(trendingMoviesPreviewList, 80)) 
 
 // Llamados a la API
 

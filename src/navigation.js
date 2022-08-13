@@ -3,7 +3,9 @@ let page = 1
 let infinityScroll
 
 searchFormBtn.addEventListener('click', () => {
-  location.hash = `#search=${searchFormInput.value}`
+  if (searchFormInput.value !== '') {
+    location.hash = `#search=${searchFormInput.value}`
+  }
 })
 trendingBtn.addEventListener('click', () => {
   location.hash = '#trends'

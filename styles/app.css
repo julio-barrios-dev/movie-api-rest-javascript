@@ -35,8 +35,10 @@ body {
   font-family: var(--font-family-text);
   font-weight: var(--font-weight-text1);
   font-size: 16px;
-  margin: 4px 0 0 0;
+  margin: 4px auto 0;
+  max-width: 800px;
   padding: 0;
+  position: relative;
 }
 
 h1, h2, h3 {
@@ -95,13 +97,13 @@ button {
 }
 
 .trendingPreview-container, .categoriesPreview-container, 
-.liked-container, footer {
-  margin-top: 48px;
+.liked-container {
+  position: relative;
 }
 
 .trendingPreview-header, .categoriesPreview-title,
 .liked-header  {
-  margin-bottom: 24px;
+  margin: 24px 0;
 }
 
 .movie-container {
@@ -186,11 +188,12 @@ button {
 .header-container--long {
   background-image: url('https://pics.filmaffinity.com/Deadpool-777527803-large.jpg');
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 19.27%, rgba(0, 0, 0, 0) 29.17%), url(https://pics.filmaffinity.com/Deadpool-777527803-large.jpg);
-  background-size: cover !important;
+  background-size: cover;
   height: 480px;
   position: fixed;
   top: 0;
   width: 100%;
+  max-width: 800px;
 }
 
 .header-container--categoryView {
@@ -247,12 +250,34 @@ button {
   height: 32px;
   width: 72px;
 }
+.trendingPreview-button-scroll {
+  position: absolute;
+  height:40px;
+  width:40px;
+  cursor: pointer;
+  color: var(--purple-light-1);
+  z-index: 2;
+}
+.button-left {
+  top:140px;
+  left:30px;
+}
+.button-right {
+  top:140px;
+  right:30px;
+}
+
+.trendingPreview-movieList::-webkit-scrollbar {
+  display: none;  
+}
 
 .trendingPreview-movieList,
 .liked-movieList {
   overflow-x: scroll;
   overflow-y: hidden;
+  scroll-snap-type: x mandatory;
   white-space: nowrap;
+  margin: 0 30px;
   height: 241px;
   padding-left: 24px;
   padding-bottom: 16px;
@@ -262,6 +287,7 @@ button {
 .liked-movieList .movie-container {
   display: inline-block;
   margin-right: 8px;
+  scroll-snap-align: start;
 }
 
 .trendingPreview-movieList .movie-container .movie-img,
@@ -386,7 +412,7 @@ button {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
-  width: calc(100vw - 24px);
+  width: calc(100% - 48px);
   padding-bottom: 16px;
   max-height: 225px;
 }
@@ -420,10 +446,13 @@ footer {
   background-color: var(--purple-medium-3);
   color: var(--purple-light-2);
   text-align: center;
+  margin-top: 48px;
   height: 48px;
   display: flex;
   justify-content: center;
   align-items: center;
+  bottom: 0;
+
 }
 
 
